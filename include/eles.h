@@ -64,14 +64,17 @@ public:
   /*! write extra restart file containing x,y,z of solution points instead of solution data */
   void write_restart_mesh(ofstream& restart_file);
 
-	/*! move all to from cpu to gpu */
-	void mv_all_cpu_gpu(void);
+  /*! move all to from cpu to gpu */
+  void mv_all_cpu_gpu(void);
 
-	/*! move wall distance Array to from cpu to gpu */
-	void mv_wall_distance_cpu_gpu(void);
+  /*! move wall distance Array to from cpu to gpu */
+  void mv_wall_distance_cpu_gpu(void);
 
   /*! move wall distance magnitude Array to from cpu to gpu */
   void mv_wall_distance_mag_cpu_gpu(void);
+
+  /*! copy the location of solution points to gpu (used in MMS test case only)*/
+  void cp_pos_upts_cpu_gpu(void);
 
 	/*! copy transformed discontinuous solution at solution points to cpu */
 	void cp_disu_upts_gpu_cpu(void);
@@ -284,6 +287,10 @@ public:
 
   /*! set opp_r */
   void set_opp_r(void);
+
+  /*! position at the solution points used in Method of Manufactured Solutions (MMS)*/
+  Array<double> pos_upts_MMS;
+  double sim_time;
 
   /*! calculate position of the plot points */
   void calc_pos_ppts(int in_ele, Array<double>& out_pos_ppts);

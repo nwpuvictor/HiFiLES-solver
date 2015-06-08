@@ -134,6 +134,9 @@ void eval_couette_flow(Array<double>& pos, double in_gamma, double in_R_ref, dou
 
 void eval_poly_ic(Array<double>& pos, double rho, Array<double>& ics, int n_dims);
 
+// Used in MMS test case
+void eval_source(Array<double>& pos, double t, double k, double c, double omega, double& ics, Array<double>& grad_ics, int n_dims, int field_flag);
+
 int factorial(int in_n);
 
 void fill_stabilization_interior_filter_tris(Array<double>& filter_matrix, int order, Array<double> &loc_upts, eles_tris *element);

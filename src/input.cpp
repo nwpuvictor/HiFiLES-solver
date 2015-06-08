@@ -846,8 +846,10 @@ void input::setup(ifstream& in_run_input_file, int rank)
   if (monitor_cp_freq == 0) monitor_cp_freq = 100000000;
   if (monitor_integrals_freq == 0) monitor_integrals_freq = 100000000;
   
-  if (!mesh_file.compare(mesh_file.size()-3,3,"neu"))
+  if (!mesh_file.compare(mesh_file.size()-3,3,"neu")) {
+    cout << mesh_file << endl;
     mesh_format=0;
+    }
   else if (!mesh_file.compare(mesh_file.size()-3,3,"msh"))
     mesh_format=1;
   else
@@ -890,8 +892,19 @@ void input::setup(ifstream& in_run_input_file, int rank)
       c_sth     = 1.;
       rt_inf    = 1.;
       mu_inf    = 0.1;
-    
-    } else { // Any other type of initial condition
+
+      if (ic_form == 8) { // ic_form ==8 is used for the method of manufactured solutions
+          omega_MMS = 3.14159265359;
+          k_source = 3.14159265359;
+          c_source = 3.0;
+          gamma = 1.4;
+          prandtl = 0.72;
+
+          if(rank ==0)
+            cout<<"Using Method of Manufactured Solutions"<<endl;
+        }
+
+      } else { // Any other type of initial condition
       
       // Dimensional reference quantities for temperature and length
       

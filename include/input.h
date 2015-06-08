@@ -76,6 +76,12 @@ public:
   double diff_coeff;
   double const_src;
 
+  // Used in Method of Manufactured Solutions
+  double c_source;
+  double k_source;
+  double omega_MMS;
+
+
   int order;
   int inters_cub_order;
   int volume_cub_order;

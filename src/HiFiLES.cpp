@@ -177,7 +177,7 @@ int main(int argc, char *argv[]) {
       /*! Time integration usign a RK scheme */
       
       for(j=0; j<FlowSol.n_ele_types; j++) {
-        
+        FlowSol.mesh_eles(j)->sim_time = FlowSol.time; //communicate time to each type of element
         FlowSol.mesh_eles(j)->AdvanceSolution(i, FlowSol.adv_type);
         
       }
@@ -236,6 +236,10 @@ int main(int argc, char *argv[]) {
       
       HistoryOutput(FlowSol.ini_iter+i_steps, init_time, &write_hist, &FlowSol);
       
+      /*! Output error if run has exact solution */
+      if (run_input.test_case != 0)
+          compute_error(FlowSol.ini_iter + i_steps, &FlowSol);
+
       if (FlowSol.rank == 0) cout << endl;
     }
     
